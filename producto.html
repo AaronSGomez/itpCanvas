@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipo MVP - NovaPay</title>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --paper: #fdfdfd;
+            --grid-lines: #cceeff; 
+            --margin-line: #ff99cc;
+            --pencil-gray: #555;
+            --blue-ink: #0044cc;
+            --screen-bg: #f0f0f0;
+            --screen-border: #333;
+        }
+
+        body {
+            background-color: aliceblue;
+            font-family: 'Indie Flower', cursive;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .notebook-page {
+            background-color: var(--paper);
+            background-image: 
+                linear-gradient(90deg, transparent 39px, var(--margin-line) 39px, var(--margin-line) 41px, transparent 41px),
+                linear-gradient(var(--grid-lines) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-lines) 1px, transparent 1px);
+            background-size: 100% 100%, 20px 20px, 20px 20px;
+            width: 100%;
+            max-width: 1300px;
+            padding: 40px 40px 40px 60px;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Permanent Marker', cursive;
+            color: var(--blue-ink);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* EL PROTOTIPO (TABLET DIBUJADA) */
+        .tablet-mockup {
+            border: 4px solid var(--screen-border);
+            border-radius: 20px;
+            padding: 15px;
+            background: #fff;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.2);
+            transform: rotate(-0.5deg);
+        }
+
+        .tablet-screen {
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* 2 partes productos, 1 parte ticket */
+            gap: 15px;
+            height: 450px;
+            border: 2px solid #ccc;
+            padding: 10px;
+            background: var(--screen-bg);
+        }
+
+        /* ZONA IZQUIERDA: PRODUCTOS */
+        .products-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .categories {
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+        }
+
+        .cat-btn {
+            background: #ddd;
+            border: 2px solid #999;
+            padding: 5px 15px;
+            border-radius: 10px 10px 0 0;
+            font-family: 'Patrick Hand';
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .cat-btn.active { background: #fff; border-bottom: none; z-index: 10; height: 32px;}
+
+        .grid-products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background: #fff;
+            padding: 10px;
+            border: 2px solid #999;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .prod-btn {
+            border: 2px dashed var(--pencil-gray);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.1s;
+            background: #fffdf0;
+        }
+        .prod-btn:active { transform: scale(0.95); background: #eee; }
+
+        .prod-icon { font-size: 2rem; margin-bottom: 5px; }
+        .prod-name { font-family: 'Patrick Hand'; line-height: 1; font-weight: bold;}
+        .prod-price { font-size: 0.9rem; color: #666; }
+
+        /* ZONA DERECHA: TICKET */
+        .ticket-area {
+            background: #fff;
+            border: 2px solid #333;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', monospace; /* Fuente de ticket */
+            padding: 10px;
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.1);
+        }
+
+        .ticket-header { text-align: center; border-bottom: 1px dashed #000; padding-bottom: 5px; margin-bottom: 5px; font-size: 0.8rem; }
+        
+        .ticket-lines { flex-grow: 1; font-size: 0.8rem; overflow-y: auto; }
+        .line { display: flex; justify-content: space-between; margin-bottom: 4px; }
+
+        .ticket-total {
+            border-top: 2px solid #000;
+            padding-top: 10px;
+            text-align: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .action-btn {
+            background: #4caf50;
+            color: white;
+            border: 3px solid #2e7d32;
+            padding: 10px;
+            text-align: center;
+            font-family: 'Permanent Marker';
+            font-size: 1.2rem;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 2px 2px 0px #1b5e20;
+        }
+
+        /* NOTAS EXPLICATIVAS (FLECHAS) */
+        .annotation {
+            position: absolute;
+            color: var(--blue-ink);
+            font-family: 'Indie Flower';
+            font-weight: bold;
+            font-size: 1.1rem;
+            width: 150px;
+            z-index: 20;
+        }
+
+        .arrow { position: absolute; width: 40px; height: 2px; background: var(--blue-ink); }
+        .arrow::after { content: '>'; position: absolute; right: -5px; top: -10px; font-size: 20px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="notebook-page">
+        <h1>Diseño MVP: Pantalla de Ventas v1.0</h1>
+
+        <div class="tablet-mockup">
+            <div style="text-align: center; margin-bottom: 5px; color: #999;">📷 Cámara (para escanear códigos)</div>
+            
+            <div class="tablet-screen">
+                
+                <div class="products-area">
+                    <div class="categories">
+                        <div class="cat-btn active">Carnes</div>
+                        <div class="cat-btn">Embutidos</div>
+                        <div class="cat-btn">Varios</div>
+                    </div>
+                    
+                    <div class="grid-products">
+                        <div class="prod-btn">
+                            <div class="prod-icon">🍖</div>
+                            <div class="prod-name">Chuletón</div>
+                            <div class="prod-price">24.50 €/kg</div>
+                        </div>
+                        <div class="prod-btn">
+                            <div class="prod-icon">🥪</div>
+                            <div class="prod-name">Bocadillo</div>
+                            <div class="prod-price">3.50 €</div>
+                        </div>
+                        <div class="prod-btn">
+                            <div class="prod-icon">💇‍♀️</div>
+                            <div class="prod-name">Corte Mujer</div>
+                            <div class="prod-price">18.00 €</div>
+                        </div>
+                        <div class="prod-btn">
+                            <div class="prod-icon">🧴</div>
+                            <div class="prod-name">Champú</div>
+                            <div class="prod-price">12.50 €</div>
+                        </div>
+                         <div class="prod-btn" style="border: 2px dashed #ccc; opacity: 0.5;">
+                            <div class="prod-icon">➕</div>
+                            <div class="prod-name">Nuevo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ticket-area">
+                    <div class="ticket-header">
+                        NOVA PAY TPV<br>
+                        Ticket: #000145<br>
+                        24/10/2025 10:30
+                    </div>
+                    <div class="ticket-lines">
+                        <div class="line"><span>1x Bocadillo</span><span>3.50</span></div>
+                        <div class="line"><span>0.450kg Chuletón</span><span>11.02</span></div>
+                    </div>
+                    <div class="ticket-total">
+                        TOTAL: 14.52 €
+                    </div>
+                    <div class="action-btn">
+                        COBRAR 💶
+                    </div>
+                </div>
+
+            </div>
+            
+            <div style="text-align: center; margin-top: 5px; font-size: 2rem;">⚪</div>
+        </div>
+
+        <div class="annotation" style="top: 380px; left: 70px; transform: rotate(-10deg);">
+            Botones GIGANTES para las manos de Paco →
+        </div>
+
+        <div class="annotation" style="top: 350px; right: 40px; transform: rotate(5deg);">
+            ← Ticket visible siempre (Para que Piluca no se líe)
+        </div>
+
+        <div class="annotation" style="top: 620px; right: 30px; color: red;">
+            ¡Botón VERDE enorme! <br>(Cierre y envío a Hacienda)
+        </div>
+
+        <div style="margin-top: 40px; border-top: 2px dashed var(--pencil-gray); padding-top: 20px;">
+            <h3>Funcionalidades del Prototipo Mínimo (MVP):</h3>
+            <ul style="list-style: none;">
+                <li><strong>1. Catálogo Visual:</strong> Nada de buscar códigos raros. Paco toca el dibujo de la chuleta.</li>
+                <li><strong>2. Gestión de Peso (La lógica oculta):</strong> 
+                    <br><em>Si el producto es "Por Kilo" (como el Chuletón) -> Al pulsar, la App abre un teclado numérico para meter el peso.</em>
+                </li>
+                <li><strong>3. Cobro Rápido:</strong> Al dar a "COBRAR", sale un popup simple: "¿Efectivo o Tarjeta?".</li>
+                <li><strong>4. Verifactu (Invisible):</strong> Al confirmar el cobro, el sistema genera el XML interno y lo guarda (o envía) sin molestar al usuario.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>
