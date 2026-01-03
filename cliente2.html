@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Persona - Paco Carnicero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&family=Permanent+Marker&family=Rock+Salt&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --paper: #fdfdfd;
+            --grid-lines: #cceeff; 
+            --margin-line: #ff99cc;
+            
+            /* Colores más "fashion" para Piluca */
+            --pen-blue: #0044cc;
+            --pen-pink: #d63384; /* Rosa fuerte */
+            --pen-purple: #6f42c1;
+            --marker-yellow: rgba(255, 255, 0, 0.4);
+            --marker-green: rgba(0, 255, 0, 0.2);
+        }
+
+        body {
+            background-color: #555;
+            font-family: 'Indie Flower', cursive;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .notebook-page {
+            background-color: var(--paper);
+            background-image: 
+                linear-gradient(90deg, transparent 39px, var(--margin-line) 39px, var(--margin-line) 41px, transparent 41px),
+                linear-gradient(var(--grid-lines) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-lines) 1px, transparent 1px);
+            background-size: 100% 100%, 20px 20px, 20px 20px;
+            background-position: 0 0, 0 20px, 0 20px;
+            
+            width: 100%;
+            max-width: 900px;
+            padding: 40px 40px 40px 60px;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.4);
+            transform: rotate(-0.5deg);
+            position: relative;
+        }
+
+        .tape {
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: absolute;
+            height: 35px;
+            width: 110px;
+            top: -15px;
+            left: 25%;
+            transform: rotate(3deg);
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Permanent Marker', cursive;
+            color: var(--pen-purple);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--pen-pink);
+        }
+
+        .profile-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .photo-section {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .photo-placeholder {
+            width: 180px;
+            height: 220px;
+            border: 1px solid #ccc;
+            margin: 0 auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            background: #fff;
+            transform: rotate(-2deg);
+            position: relative;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .details-section {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        h2 {
+            font-family: 'Patrick Hand', cursive;
+            color: var(--pen-pink);
+            border-bottom: 2px dotted var(--pen-pink);
+            margin-top: 10px;
+            font-size: 1.6rem;
+        }
+
+        .quote-box {
+            background-color: rgba(255, 192, 203, 0.2); /* Fondo rosa suave */
+            border-left: 5px solid var(--pen-purple);
+            padding: 15px;
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+            border-radius: 0 10px 10px 0;
+        }
+
+        ul { list-style: none; padding-left: 5px; }
+        li { margin-bottom: 10px; font-size: 1.2rem; }
+        
+        .arrow { color: var(--pen-blue); font-weight: bold; }
+        .star { color: #f1c40f; }
+
+        .tags { margin-top: 20px; }
+        .tag {
+            display: inline-block;
+            background: var(--pen-purple);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-family: 'Patrick Hand';
+            margin-right: 5px;
+            font-size: 1rem;
+            transform: rotate(var(--r));
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="notebook-page">
+        <div class="stain"></div> <h1>Ficha Cliente: Carnicería Paco</h1>
+
+        <div class="profile-container">
+            
+            <div class="photo-section">
+               <div class="photo-placeholder" style="overflow: hidden; background: none; border: 4px solid var(--ink-black);">
+    <div class="tape" style="z-index: 20;"></div>
+    <img src="./assets/paco.png" 
+         alt="Paco Carnicero" 
+         style="width: 100%; height: 100%; object-fit: cover;">
+</div>
+<div style="font-family: 'Permanent Marker'; font-size: 1.6rem; color: var(--pen-blue); margin-top: 10px; transform: rotate(-2deg);">
+                    Carnicería Paco
+                </div>
+
+                
+                <p style="font-size: 1.2rem; text-align: left; margin-left: 25px; line-height: 1.6;">
+                    <strong>Edad:</strong> 58 años<br>
+                    <strong>Negocio:</strong> Carnicería Mercado<br>
+                    <strong>Herramienta:</strong> Cuchillo y Tablet (¡Peligro!)
+                </p>
+                
+                <div class="tags">
+                    <span class="tag" style="--r: -3deg;">#Mercado</span>
+                    <span class="tag" style="--r: 2deg;">#VentaAlPeso</span>
+                    <span class="tag" style="--r: -1deg;">#FilaDeEspera</span>
+                </div>
+            </div>
+
+            <div class="details-section">
+                
+                <div class="quote-box">
+                    "Mira, tengo cola de gente esperando. No puedo estar media hora tocando botones con los guantes puestos."
+                </div>
+
+                <h2>⚠️ Puntos de Dolor (Lo que le molesta)</h2>
+                <ul>
+                    <li class="pain"><strong>Manos sucias/ocupadas:</strong> Tocar una pantalla táctil fina es un engorro. Necesita botones GIGANTES.</li>
+                    <li class="pain"><strong>Doble trabajo:</strong> Pesa en la balanza (1.250kg) y luego tiene que teclearlo en el TPV. ¡Quiere que se conecten!</li>
+                    <li class="pain"><strong>Miedo a equivocarse:</strong> Si se equivoca en un ticket, anularlo delante de la señora María es un drama.</li>
+                </ul>
+
+                <h2>🏆 Qué le soluciona la vida (Gains)</h2>
+                <ul>
+                    <li class="gain"><strong>Velocidad Extrema:</strong> "Pulsar 'Chuletón' -> Pesar -> Cobrar". En 3 segundos.</li>
+                    <li class="gain"><strong>Robustez:</strong> Una tablet con funda rugerizada que aguante golpes y salpicaduras.</li>
+                    <li class="gain"><strong>Verifactu invisible:</strong> Que el ticket salga legal sin que él se entere de nada.</li>
+                </ul>
+
+                <h2>🔧 Nota Técnica (Java/Kotlin)</h2>
+                <div style="border: 2px dashed var(--ink-blue); padding: 10px; background: rgba(41, 128, 185, 0.1); font-size: 1.1rem; transform: rotate(-1deg);">
+                    <strong style="color: var(--ink-blue);">¡OJO AL DATO!:</strong><br>
+                    Aquí el reto son los <strong>decimales</strong> (Float/Double).<br>
+                    No vendemos 1 unidad, vendemos <em>0,350 Kg</em> a <em>14,99 €/Kg</em>.<br>
+                    Hay que programar bien el cálculo para no perder céntimos por redondeo (Clase <code>BigDecimal</code> en Java).
+                </div>
+
+            </div>
+        </div>
+        
+        <div style="position: absolute; bottom: 15px; right: 40px; font-family: 'Rock Salt'; color: var(--ink-black); font-size: 0.8rem;">
+            Ref: Puesto Nº 14
+        </div>
+
+    </div>
+
+</body>
+</html>
